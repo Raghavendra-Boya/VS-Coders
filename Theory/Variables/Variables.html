@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Variable</title>
+</head>
+<body>
+    <!--
+    //Varibale
+    //types of variable
+    //1. Var
+    //2 let
+    //const
+
+//jar label = value;===>declaration
+    var a;
+    a = 20;
+    console.log(a)
+    a = 30;
+
+    //redeclaration:
+
+    var b = 20;
+    clg(b)
+    
+    -->
+    <script>
+
+
+        var a = 10;
+         var a = 30;
+
+         a = 50;
+        console.log(a);
+       a = 60;
+        console.log(a);
+
+        //var
+
+        //1. Scope: Functional Scope
+        //re-declaration and re-assign is possible
+        
+        //Let
+
+        //Scope: block level scope
+        //redeclaration is not possible & Re-assign possible
+
+
+       
+        var d = 10;
+        d= 40;
+        console.log(d);//40
+        // let e = 20;
+        if(true){
+           var d = 30;
+            console.log(d);//30
+         d = 20;
+            console.log(d);//20
+        }
+        console.log(d);//
+// console.log(e);//20
+// console.log(s);
+      
+// var x;
+// console.log(x);
+// console.log(z);
+
+//const
+
+//RUles
+
+
+
+var a = 100;
+
+if(true){
+    console.log(a);
+    var a = 200;
+    console.log(a);
+}
+console.log(a);
+
+
+// console.log(num);
+// let num = 10;
+
+// var num;
+// console.log(num);
+// num = 10;
+
+var num1 = 20;
+
+console.log(num1);
+if(true){
+    console.log(num1);
+    var num1 = 30;
+    console.log(num1);
+}
+
+var num2 = 20;
+
+console.log(num2);
+function function1(){
+    console.log(num2);
+    var num2 = 30;
+    console.log(num2);
+}
+function1()
+
+// if(true){
+//     var num1;
+//     console.log(num1);
+//     num1 = 30;
+//     console.log(num1);
+// }
+
+//Scopes
+
+//Glbal Scope
+
+// let globalVar = " i am GV1";
+// let globalVar1 = "i am GV2";
+
+function function2(){
+
+    let functionScope = " i am from inside the function";
+    // let globalVar = " i am GVV1";
+    // let globalVar1 = "i am GVV2";
+    console.log(globalVar);
+    console.log(globalVar1);
+    console.log(functionScope);
+    if(true){
+    //     let globalVar = " i am GVV1";
+    // let globalVar1 = "i am GVV2";
+         console.log(globalVar);
+    console.log(globalVar1);
+    console.log(functionScope);
+    var name = "JS";
+    let Skill = "HTML";
+    const fee = "3000";
+
+    }
+    console.log(name);
+    console.log(Skill);
+    console.log(fee);
+     console.log(globalVar);
+    console.log(functionScope);
+}
+
+function2();
+console.log(functionScope);//x
+console.log(functionScope);//x
+console.log(globalVar);
+console.log(globalVar1);
+
+
+
+//Q-1
+
+var a = 10;
+
+function test() {
+  console.log(a);//10
+  var a = 20;
+  console.log(a);
+}
+
+test();
+
+//Q-2
+let x = 5;
+
+if (true) {
+  let x = 10;
+  console.log(x); 
+}
+
+console.log(x); 
+
+//q-3 
+
+function printAge() {
+  console.log(age);
+  let age = 30;
+
+
+  let age;
+  console.log(age);
+  age = 30;
+}
+printAge();
+
+//q-4
+
+var msg = "hello";
+
+function outer() {
+  var msg = "hi";
+
+  if (true) {
+    var msg = "hey";
+    console.log("Inside block:", msg);
+  }
+
+  console.log("Inside function:", msg);
+}
+
+outer();
+console.log("Global:", msg);
+
+
+//Q-6:
+
+let count = 1;
+
+function check() {
+  if (count === 1) {
+    let count = 2;
+    console.log(count);
+  }
+  console.log(count);
+}
+
+check();
+
+//Q-6
+
+var a = "A";
+
+function scopeTest() {
+    let a;
+  console.log(a);
+  {
+    let a = "B";
+  }
+}
+
+scopeTest();
+
+//q-7
+
+function testScope() {
+  if (true) {
+    var a = "inside if";
+  }
+
+  for (var i = 0; i < 1; i++) {
+    var a = "inside for";
+  }
+
+  console.log(a);
+}
+
+testScope();
+
+
+//q-8
+
+let name = "Vamsi";
+
+function print() {
+  if (false) {
+    var name = "Krishna";
+  }
+  console.log(name);
+}
+
+print();
+
+
+//q-10
+
+function tricky() {
+
+  console.log(x);
+  {
+    let x = 50;
+  }
+}
+tricky();
+
+//q-11
+
+function example() {
+
+
+    
+  if (true) {
+    var a = 10;
+    let b = 20;
+    const c = 30;
+  }
+
+  console.log(a); 
+  console.log(b); 
+  console.log(c); 
+}
+
+example();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>
