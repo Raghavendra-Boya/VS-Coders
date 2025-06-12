@@ -73,9 +73,9 @@ String(123)//"123"
 
 //0,"",null,undefined,fflse
 
-console.log("abc" + "3");
+console.log("abc" * "3");
 
-console.log(Number("hello"));
+    console.log(Number("hello"));
 console.log(parseInt("xyz"));
 
 let x;
@@ -90,15 +90,15 @@ console.log('5' - 2);
 
 console.log(true + false);
 
-// console.log([] === false);//
+// console.log([] == false);//
 let rr= 0.1 + 0.2;
 console.log(rr);
 console.log( rr === 0.3);
 
 console.log("5" + 1 * 2);
 
-let result = 10 > 5 ? 10 > 7 ? 'A' : 'B' : 'C';
-console.log(result);
+// let result = 10 > 5 ? 10 > 7 ? 'A' : 'B' : 'C';
+// console.log(result);
 
 //Increment
 //pre =>++a
@@ -107,12 +107,42 @@ console.log(result);
 
 let z = 10;
 console.log(z++);
-console.log(++z);//11
+console.log(++z);
 //
 
-let a = 5;
-let b = a++;
-console.log(a, b);
+
+// a1==>5  
+const a1 = 5;
+const b1 = a1++;
+console.log(a1, b1);
+
+//what is operator?
+//operator is a symbol that tells the compiler or interpreter to perform a specific operation on one or mor
+//e operands and produce a result.
+//operators can be classified into several categories
+//1.Arithmetic operators
+//2.Assignment operators
+//3.Comparison operators
+//4.Logical operators
+//5.Bitwise operators
+//6.String operators
+//7.Unary operators
+//8.Ternary operator
+//1.Arithmetic operators
+//Arithmetic operators are used to perform mathematical operations such as addition, subtraction, multiplication, division,
+// modulus, etc.
+//1.Addition operator
+//The addition operator is used to add two or more numbers together.
+// let a = 5;
+// let b = 3;
+// let result = a + b;
+// console.log(result); // Output: 8
+//2.Subtraction operator
+//The subtraction operator is used to subtract one number from another.
+// let a = 5;
+
+
+
 
 
 
