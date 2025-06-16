@@ -106,14 +106,15 @@ console.log("5" + 1 * 2);
 
 
 let z = 10;
-console.log(z++);
-console.log(++z);
+z++;//11
+console.log(z++);//11---->12
+console.log(++z);//13
 //
 
 
 // a1==>5  
-const a1 = 5;
-const b1 = a1++;
+const a1 = 5;//5
+const b1 = a1++;//5===>6
 console.log(a1, b1);
 
 //what is operator?

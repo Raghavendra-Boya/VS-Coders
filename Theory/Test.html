@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Counter Example</title>
+</head>
+<body>
+  <h2>Counter: <span id="counterValue">0</span></h2>
+  <button onclick="incrementCounter()">Increment</button>
+  <button onclick="decrementCounter()">Decrement</button>
+
+  <script>
+    let counter = 0;
+
+    function incrementCounter() {
+      let i = 0;
+      while (i < 3) { // using while just to fit learning
+        counter++;
+        i++;
+      }
+      document.getElementById("counterValue").innerText = counter;
+    }
+
+    function decrementCounter() {
+      let i = 0;
+      while (i < 3) {
+        counter--;
+        i++;
+      }
+      document.getElementById("counterValue").innerText = counter;
+    }
+  </script>
+</body>
+</html>
