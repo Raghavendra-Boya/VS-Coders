@@ -1,33 +1,85 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Counter Example</title>
+  <meta charset="UTF-8">
+  <title>Recipe Order</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-  <h2>Counter: <span id="counterValue">0</span></h2>
-  <button onclick="incrementCounter()">Increment</button>
-  <button onclick="decrementCounter()">Decrement</button>
+<body class="bg-gray-400 p-6">
+
+  <div class="text-2xl font-bold text-center mb-6">🍽️ Welcome to Recipe World</div>
+
+  <!-- Container for recipe cards -->
+  <div id="cardContainer" class="flex  gap-6 justify-center"></div>
+
+  <!-- Output Message and Steps -->
+  <div class="mt-8 text-center">
+    <h2 id="message" class="text-xl text-green-700 font-bold"></h2>
+    <div id="steps" class="mt-4  text-gray-800 "></div>
+  </div>
 
   <script>
-    let counter = 0;
-
-    function incrementCounter() {
-      let i = 0;
-      while (i < 3) { // using while just to fit learning
-        counter++;
-        i++;
+    // ✅ Recipe data array
+    let recipes = [
+      {
+        name: "Paneer",
+        image: "https://cdn1.foodviva.com/static-content/food-images/curry-recipes/jeera-aloo-recipe/jeera-aloo-recipe.jpg",
+        price: 200,
+        discount: 10,
+        isAvailable: true
+      },
+      {
+        name: "Aloo",
+        image: "https://tse2.mm.bing.net/th?id=OIP.Xk8ct2Ye-acFhqtnj_QU_wHaFA&pid=Api&P=0&h=180",
+        price: 150,
+        discount: 20,
+        isAvailable: false
       }
-      document.getElementById("counterValue").innerText = counter;
+    ];
+
+    // ✅ Function to show recipe steps
+    function recipe(mainIngredient) {
+      let steps = `Step-1: Add Oil<br>
+                   Step-2: Add Ingredients<br>
+                   Step-3: Add ${mainIngredient}<br>
+                   Step-4: Cook for 20 minutes<br>`;
+      document.getElementById("steps").innerHTML = steps;
+    };
+
+    // ✅ Order button click handler
+    function orderNow(mainIngredient) {
+      document.getElementById("message").innerText = `✅ Your order is accepted for ${mainIngredient} Curry!`;
+      recipe(mainIngredient); // show steps
     }
 
-    function decrementCounter() {
-      let i = 0;
-      while (i < 3) {
-        counter--;
-        i++;
-      }
-      document.getElementById("counterValue").innerText = counter;
+    // ✅ Generate cards using a basic for loop
+    let cardHTML = "";
+    for (let i = 0; i < recipes.length; i++) {
+      let recipeData = recipes[i];
+      let payable = recipeData.price - (recipeData.price * recipeData.discount / 100);
+      let availableClass = recipeData.isAvailable ? "text-green-600" : "text-red-600";
+      let availabilityText = recipeData.isAvailable ? "Available" : "Out of Stock";
+      let disabled = recipeData.isAvailable ? "" : "disabled";
+
+      cardHTML += `
+        <div class="bg-white shadow-xl rounded-2xl w-80 overflow-hidden">
+          <img src="${recipeData.image}" alt="${recipeData.name} Curry" class="w-full h-48 object-cover">
+          <div class="p-4">
+            <h2 class="text-xl font-semibold mb-2">${recipeData.name} Curry</h2>
+            <p>Price: ₹${recipeData.price}</p>
+            <p>Discount: ${recipeData.discount}%</p>
+            <p class="font-semibold">Payable: ₹${payable}</p>
+            <p class="${availableClass} font-bold">${availabilityText}</p>
+            <button onclick="orderNow('${recipeData.name}')" ${disabled}
+              class="mt-4 w-full bg-blue-600 hover:bg-blue-900 text-white py-2 rounded-xl disabled:opacity-50">
+              Order Now
+            </button>
+          </div>
+        </div>
+      `;
     }
+
+    document.getElementById("cardContainer").innerHTML = cardHTML;
   </script>
 </body>
 </html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    .container {
+        display: grid;
+        grid-template-columns: repeat(3,1fr);
+        row-gap: 100px;
+        /* grid-template: 100px 200px 300px/ 200px 200px; */
+        background-color: aqua;
+    }
+    .grid-table{
+        display: grid;
+        grid-template-columns: repeat(4,1fr);
+    }
+    .header{
+        font-weight: bold;
+    }
+    .grid-table div{
+        border: 1px solid red;
+    }
+    .row{
+        grid-row: span 3;
+    }
+</style>
+</head>
+
+<body>
+    <div class="container">
+        <div>card1</div>
+        <div>card2</div>
+        <div>card3</div>
+        <div>card4</div>
+        <div>card5</div>
+    </div>
+
+    <div class="grid-table">
+        <div class="header">Student name</div>
+        <div class="header">CLass</div>
+        <div class="header">subject</div>
+        <div class="header">marks</div>
+
+        <div style="grid-row: span 3; grid-column: span 2;">Aruna</div>
+        <!-- <div>AIT-1</div> -->
+        <div class="row">HTML</div>
+        <div>0</div>
+
+        <!-- <div>Manasa</div>
+        <div>AIT-2</div> -->
+        <!-- <div class="row">HTML</div> -->
+        <div>12</div>
+
+        <!-- <div>Janani</div>
+        <div>AIT-3</div> -->
+        <!-- <div class="row">HTML</div> -->
+        <div>15</div>
+    </div>
+</body>
+</html>
