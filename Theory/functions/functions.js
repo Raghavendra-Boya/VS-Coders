@@ -122,7 +122,7 @@ let reciepe = [
         img : "https://cdn1.foodviva.com/static-content/food-images/curry-recipes/jeera-aloo-recipe/jeera-aloo-recipe.jpg",
         price: 200,
         discount: 10,
-        isAvailable: true
+        isAvailable: false
     },
     {
         name:"Panner",
@@ -136,7 +136,7 @@ let reciepe = [
 ];
 
 
-function curry(ingredient="Aruna"){
+function curry(ingredient){
    
 document.getElementById("steps").innerText =  `
 
@@ -147,8 +147,7 @@ Step-3: add ${ingredient}<br>
 Step-4: cook for 20min`
 }
 
-let result = document.getElementById("name").value;
-console.log(result);
+
 
 let cardHTML = "";
 
@@ -171,7 +170,7 @@ for(let i =0;i<reciepe.length;i++){
     <p>Final Price: ${payable}</p>
     <p class="${textColor} font-bold">${availabilityText}</p>
     
-    <button class="mt-4 w-full bg-blue-600 mb-2 py-2 rounded-2xl" onClick="curry()" ${disabled}>Order Now</button>
+    <button class="mt-4 w-full bg-blue-600 mb-2 py-2 rounded-2xl" onClick="curry(${reciepeData.name})" ${disabled}>Order Now</button>
     </div>
     
     </div>
@@ -184,4 +183,74 @@ document.getElementById("cardContainer").innerHTML = cardHTML;
 
 
 
+//FUnction with out parameter and with return statement
 
+function name2(){
+    return "Hello"    
+}
+let result = name2();
+console.log(result);
+
+
+//Use cases
+
+//1. Mathemetical Calculations
+//2. Current date of system
+//tax calculation
+//tandom motivation 
+
+function getAppVersion(){
+    return "V1.0.2";
+}
+
+console.log(getAppVersion());
+
+function getCurrentTime(){
+    return new Date().toLocaleTimeString();
+}
+console.log(getCurrentTime());
+
+function getRandQuotes(){
+    const q = ["A","B","C","D"];
+
+    return q[Math.floor(Math.random()*q.length)]
+}
+
+console.log(getRandQuotes());
+
+// console.log(Math.random()*4);
+
+
+//Function with parameter and return
+
+// function Syntax(parametr){
+//     return result;
+// }
+
+//math calculations
+//eligibility 
+//bill
+
+function isEligible(age,prime){
+    if(age>=60 || prime){
+        return true;
+    }
+    return false;
+}
+
+console.log(isEligible(50,false));
+
+function bill(price,disc,tax){
+    return (price-(price*disc))+(price*tax)
+}
+
+console.log(bill(200,0.1,0.5));
+
+//FUnction with Default parameter
+
+function discount(price,disc = 0.05){
+    return price-price*disc;
+}
+
+console.log(discount(500));//
+console.log(discount(1000,0.1));
