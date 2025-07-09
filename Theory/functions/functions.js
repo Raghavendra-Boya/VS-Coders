@@ -254,3 +254,35 @@ function discount(price,disc = 0.05){
 
 console.log(discount(500));//
 console.log(discount(1000,0.1));
+
+//Function Declaration/
+
+let result2 = function(num){
+    return num*num;
+}
+
+console.log(result2(5));
+
+
+//IIFE
+
+(function(){
+    console.log("IIFE");
+})
+
+
+
+()
+
+
+//Callback function
+
+
+function welcomeMessage(callback){
+    console.log("Welcom!");
+    callback();
+}
+
+welcomeMessage(function(){
+    console.log("Good Morning");
+})

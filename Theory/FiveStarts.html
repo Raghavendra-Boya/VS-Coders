@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Star Rating using Functions</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .star {
+      font-size: 2rem;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+
+  <div class="bg-white p-6 rounded shadow-md text-center">
+    <h2 class="text-xl font-bold text-yellow-600 mb-2">Rate This Course</h2>
+    <div id="stars" class="flex justify-center gap-2 mb-4"></div>
+    <p id="ratingText" class="text-lg font-medium text-gray-700"></p>
+  </div>
+
+  <script>
+    const totalStars = 5;
+    let currentRating = 0;
+
+    // ✅ Function to display stars dynamically
+    function renderStars() {
+      const container = document.getElementById("stars");
+      container.innerHTML = "";
+
+      for (let i = 1; i <= totalStars; i++) {
+        container.innerHTML += `
+          <span class="star ${i <= currentRating ? 'text-yellow-500' : 'text-gray-400'}"
+                onclick="rate(${i})">&#9733;</span>
+        `;
+      }
+    }
+
+    // ✅ Function that runs when a star is clicked
+    function rate(value) {
+      currentRating = value;
+      renderStars();
+      document.getElementById("ratingText").innerText = `You rated: ${value} / 5`;
+    }
+
+    // 🔁 Initial render
+    renderStars();
+  </script>
+
+</body>
+</html>

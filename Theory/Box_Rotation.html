@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>3D Rotating Image Cube</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .scene {
+      perspective: 1000px;
+    }
+
+    .cube {
+      transform-style: preserve-3d;
+      transition: transform 1s ease-in-out;
+    }
+
+    .face {
+      position: absolute;
+      width: 240px;
+      height: 240px;
+      backface-visibility: hidden;
+    }
+
+    .front  { transform: rotateY(0deg)   translateZ(120px); }
+    .right  { transform: rotateY(90deg)  translateZ(120px); }
+    .back   { transform: rotateY(180deg) translateZ(120px); }
+    .left   { transform: rotateY(-90deg) translateZ(120px); }
+  </style>
+</head>
+<body class="flex items-center justify-center h-screen bg-gray-100">
+
+  <div class="scene w-[240px] h-[240px] relative">
+    <div id="cube" class="cube w-full h-full relative">
+      <div class="face front">
+        <img src="https://images.pexels.com/photos/32706805/pexels-photo-32706805.jpeg" class="w-full h-full object-cover rounded-lg" />
+      </div>
+      <div class="face right">
+        <img src="https://images.pexels.com/photos/20369125/pexels-photo-20369125.jpeg" class="w-full h-full object-cover rounded-lg" />
+      </div>
+      <div class="face back">
+        <img src="https://images.pexels.com/photos/32571603/pexels-photo-32571603.jpeg" class="w-full h-full object-cover rounded-lg" />
+      </div>
+      <div class="face left">
+        <img src="https://images.pexels.com/photos/32470698/pexels-photo-32470698.jpeg" class="w-full h-full object-cover rounded-lg" />
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <input type="text" autofocus>
+  </div>
+
+
+  <script>
+    const cube = document.getElementById("cube");
+    let angle = 0;
+
+    let rotate = function(){
+      angle -= 90; // rotate left
+      cube.style.transform = `rotateY(${angle}deg)`;
+    }
+
+    setInterval(rotate, 2000);
+  </script>
+</body>
+</html>
