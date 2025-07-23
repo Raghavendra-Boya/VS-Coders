@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product filter</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body>
+    
+    <div>
+        <input id="nameFilter" type="text" placeholder="filter by name" class="p-2 border border-blue-500 rounded">
+        <input id="priceFilter" type="number" placeholder="filter by price" class="p-2 border border-blue-500 rounded">
+        <button class="bg-blue-500 border rounded p-2 text-white" onclick="applyFilters()">Apply Filter</button>
+    </div>
+
+    <div id="productContainer" class="grid grid-cols-3 gap-4">
+
+    </div>
+
+    <script>
+        let products = 
+           [
+  { name: "iPhone 13", price: 69000, img: "https://tse1.mm.bing.net/th/id/OIP.DKbu12F81bmmMQCiY8FLcgHaIw?pid=Api&P=0&h=180" },
+  { name: "Samsung Galaxy S22", price: 62000, img: "https://tse1.mm.bing.net/th/id/OIP.nRYNVaN_Hx6dpNArJYYD5wHaHa?pid=Api&P=0&h=180" },
+  { name: "Google Pixel 7", price: 59999, img: "https://tse1.mm.bing.net/th/id/OIP.yVb1sHtNQqQkR0EnFCSgVwHaHa?pid=Api&P=0&h=180" },
+  { name: "OnePlus 11", price: 56999, img: "https://tse1.mm.bing.net/th/id/OIP.kfrn2RSrgUqtdLqvUUG_7QHaHa?pid=Api&P=0&h=180" },
+  { name: "Xiaomi 13 Pro", price: 54999, img: "https://tse1.mm.bing.net/th/id/OIP.WM7k6Z_3W9AyKQQwFkXyJwHaHa?pid=Api&P=0&h=180" },
+  { name: "Realme GT Neo 3", price: 42999, img: "https://tse1.mm.bing.net/th/id/OIP.JPYR9h2rNSh1Jc4UZhM3zQHaHa?pid=Api&P=0&h=180" },
+  { name: "Motorola Edge 30", price: 34999, img: "https://tse1.mm.bing.net/th/id/OIP.4HRctmTxFBOhJv-BXvhKdgHaHa?pid=Api&P=0&h=180" },
+  { name: "Nothing Phone (2)", price: 45999, img: "https://tse1.mm.bing.net/th/id/OIP.iV0ZK44CeE4nUKN4QvWg1AHaHa?pid=Api&P=0&h=180" }
+]
+
+        function renderProduct(list){
+            let container = document.getElementById("productContainer");
+            container.innerHTML = "";
+
+
+            for(let i = 0;i<list.length;i++){
+                let product = list[i];
+                const card = document.createElement("div");
+                card.className = "bg-white p-4 rounded text-center text-blue";
+
+                card.innerHTML = `
+                <img src="${product.img}" alt="${product.name}">
+                <h2>${product.name}</h2>
+                <p>${product.price}</p>
+                
+                
+                `;
+                container.appendChild(card);
+            }
+        }
+        // renderProduct(products);
+
+        function applyFilters(){
+            const nameValue = document.getElementById("nameFilter").value.toLowerCase();
+            const priceValue  = parseInt( document.getElementById("priceFilter").value);
+
+            let filtered = products;
+            if(nameValue){
+                // includes(nameValue);
+
+                filtered = filtered.filter(item=>item.name.toLowerCase().includes(nameValue));
+            }
+            if(!isNaN(priceValue)){
+                filtered = filtered.filter(item => item.price > priceValue);
+            }
+
+            renderProduct(filtered)
+        }
+
+        renderProduct(products)
+    // </script>
+</body>
+</html>

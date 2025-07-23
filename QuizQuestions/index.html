@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Product Filter</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen p-6">
+
+  <div class="max-w-6xl mx-auto">
+    <h1 class="text-3xl font-bold text-center text-blue-700 mb-6">🛍 Product Gallery</h1>
+
+    <!-- Filter Inputs -->
+    <div class="flex flex-col md:flex-row items-center gap-4 justify-center mb-8">
+      <input id="nameFilter" type="text" placeholder="Filter by name..."
+             class="border border-gray-300 p-2 rounded w-64" />
+      <input id="priceFilter" type="number" placeholder="Price > ₹..."
+             class="border border-gray-300 p-2 rounded w-64" />
+      <button onclick="applyFilters()"
+              class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">
+        Apply Filters
+      </button>
+    </div>
+
+    <!-- Product Cards -->
+    <div id="productContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <!-- Cards will be inserted here -->
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

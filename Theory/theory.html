@@ -1,97 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Intro</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shopping Cart - Using JS Loops</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
+<body class="bg-gray-100 p-6 font-sans">
 
-<body>
+  <h1 class="text-3xl font-bold mb-6">🛍️ Product List</h1>
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6" id="productList"></div>
 
-    <button onclick="buttonClicked()"></button>
+  <h2 class="text-2xl font-semibold mt-10 mb-4">🛒 Your Cart</h2>
+  <div id="cart" class="space-y-4"></div>
 
-    <script src="./script.js">
+  <script>
+    // ✅ Product catalog
+    const products = [
+      { id: 1, name: "Apple Watch", price: 299 },
+      { id: 2, name: "Bluetooth Speaker", price: 99 },
+      { id: 3, name: "Noise Cancelling Headphones", price: 199 },
+      { id: 4, name: "Smartphone Stand", price: 20 },
+    ];
 
-    </script>
+    // 🛒 Cart array
+    const cart = [];
 
-    <!--
-        =>What is JavaScript?
-            JavaScript is a lightweight, interpreted, or just-in-time compiled programming language primarily used to make web pages interactive. It is a client-side scripting language that runs directly in the browser. JavaScript is one of the core technologies of the web, alongside HTML and CSS.
-        =>Key Features of JavaScript
-            1. Dynamic Typing: Variable types are determined at runtime.
-            2. Event-Driven: Executes code in response to user actions like clicks, hover, etc.
-            3. Object-Oriented: Supports object-oriented programming through prototypes.
-            4. Platform-Independent: Runs in web browsers without the need for additional software.
-            5. High-Level: Abstraction over low-level operations, making it easier to work with.
-            6. First-Class Functions: Functions can be treated as variables, passed as arguments, or returned from other functions.
-=> Why is JavaScript Called a Scripting Language?
-    JavaScript is called a scripting language because it is primarily used for automating tasks and creating interactive web
+    const productList = document.getElementById("productList");
+    const cartContainer = document.getElementById("cart");
 
-=> History of JavaScript
-    JavaScript was created in 1995 by Brendan Eich at Netscape. Initially developed in 10 days, it was called Mocha, then renamed LiveScript, and finally JavaScript to capitalize on the popularity of Java at the time. Despite its name, JavaScript has little to do with Java.
-Timeline
-    1995: Creation of JavaScript (originally Mocha) by Netscape.
-    1996: Microsoft introduced JScript as a competitor.
-    1997: JavaScript became standardized as ECMAScript (ES) by ECMA International.
-    2005: The rise of AJAX (Asynchronous JavaScript and XML) popularized JavaScript for dynamic web applications.
-    2015: Major update with ECMAScript 6 (ES6), introducing new features like let, const, classes, and arrow functions.
-=> Versions of JavaScript:
-    JavaScript is standardized under the name ECMAScript (ES). Here’s a summary of notable versions:
-    ES1 (1997): The first edition standardized the language.
-    ES3 (1999): Added regular expressions, try/catch, and switch statements.
-    ES5 (2009): Introduced strict mode, JSON support, and array methods like forEach, map, and filter.
-    ES6/ES2015: Major update with let, const, template literals, classes, arrow functions, promises, modules, and more.
-    ES7/ES2016: Added Array.prototype.includes and the exponentiation operator (**).
-    ES8/ES2017: Introduced async/await and object entries.
-    ES9/ES2018: Added rest/spread properties and asynchronous iteration.
-    ES10/ES2019: Improved string methods, optional catch binding.
-    ES11/ES2020: Introduced optional chaining (?.) and nullish coalescing (??).
-=> How to Run JavaScript:
-    JavaScript can be executed in various environments. Here are the most common methods:
-    1. Running JavaScript in the Browser
-        Modern browsers like Chrome, Firefox, and Safari have built-in JavaScript engines. You can run JavaScript in the browser using the Console:
-            1. Open your browser.
-            2. Right-click on the page and select Inspect or press F12.
-            3. Navigate to the Console tab.
-            4. Type JavaScript code and press Enter.
+    // 🚀 Render product cards using traditional for loop
+    function renderProducts() {
+      for (let i = 0; i < products.length; i++) {
+        const product = products[i];
+        const card = document.createElement("div");
+        card.className = "bg-white p-4 rounded-xl shadow hover:shadow-lg text-center";
+        card.innerHTML = `
+          <h3 class="text-lg font-semibold">${product.name}</h3>
+          <p class="text-gray-600 mb-2">₹${product.price}</p>
+          <button id="add-${product.id}" onclick="addToCart(${product.id})"
+            class="bg-green-600 hover:bg-green-700 text-white py-1 px-4 rounded w-full">
+            Add to Cart
+          </button>
+        `;
+        productList.appendChild(card);
+      }
+    }
 
-Example:
-console.log("Hello, JavaScript!");
+    // ➕ Add item to cart if not already present
+    function addToCart(productId) {
+      let exists = false;
+      for (let i = 0; i < cart.length; i++) {
+        if (cart[i].id === productId) {
+          exists = true;
+          break;
+        }
+      }
 
-    2. Running JavaScript in an HTML File
-        You can embed JavaScript directly into HTML files using the <script> tag.
-            Example:
-            <!DOCTYPE html>
-            <html lang="en">
-            <head>
-                <title>JavaScript Example</title>
-            </head>
-            <body>
-                <h1>JavaScript Example</h1>
-                <script>
-                    alert("Welcome to JavaScript!");
-                </script>
-            </body>
-            </html>
-            Open this file in a browser to see the alert.
-           
-            3. Running JavaScript in a JavaScript Engine
-            There are several JavaScript engines available, such as V8 (used by Google Chrome), SpiderMonkey
-            (used by Mozilla Firefox), and JavaScriptCore (used by Safari). You can run JavaScript in
-            these engines using their respective APIs.
+      if (exists) {
+        const product = products.find(p => p.id === productId);
+        showToast(`${product.name} is already in the cart!`);
+        return;
+      }
 
-=> Implementation of JavaScript:
-    JavaScript is implemented using various engines and platforms. Here are the main ways JavaScript is implemented:
+      // Add new item
+      for (let i = 0; i < products.length; i++) {
+        if (products[i].id === productId) {
+          cart.push({ ...products[i], quantity: 1 });
+          break;
+        }
+      }
 
-    1. Browser Engines
-        Each browser has a built-in JavaScript engine to execute JavaScript code.
-            1. V8: Used in Google Chrome.
-            2. SpiderMonkey: Used in Mozilla Firefox.
-            3. JavaScriptCore (Nitro): Used in Apple Safari.
-            4. Chakra: Used in Microsoft Edge (Legacy).
+      renderCart();
+    }
 
-    -->
+    // 🔄 Update item quantity
+    function updateQuantity(id, change) {
+      for (let i = 0; i < cart.length; i++) {
+        if (cart[i].id === id) {
+          cart[i].quantity += change;
+          if (cart[i].quantity < 1) {
+            cart[i].quantity = 1;
+          }
+          break;
+        }
+      }
+      renderCart();
+    }
+
+    // 🧾 Render cart items using traditional for loop
+    function renderCart() {
+      cartContainer.innerHTML = "";
+
+      for (let i = 0; i < cart.length; i++) {
+        const item = cart[i];
+        const row = document.createElement("div");
+        row.className = "bg-white p-4 rounded-xl shadow flex justify-between items-center";
+
+        row.innerHTML = `
+          <div>
+            <p class="font-medium text-gray-800">${item.name}</p>
+            <p class="text-sm text-gray-600">Quantity: ${item.quantity}</p>
+            <p class="text-sm font-semibold text-blue-600">Total: ₹${item.quantity * item.price}</p>
+          </div>
+          <div>
+            <button onclick="updateQuantity(${item.id}, -1)"
+              class="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded">-</button>
+            <button onclick="updateQuantity(${item.id}, 1)"
+              class="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded ml-2">+</button>
+          </div>
+        `;
+        cartContainer.appendChild(row);
+      }
+    }
+
+    // 🔔 Toast message
+    function showToast(message) {
+      const toast = document.createElement("div");
+      toast.className = "fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-red-500 text-white px-6 py-2 rounded shadow-lg z-50";
+      toast.innerText = message;
+
+      document.body.appendChild(toast);
+      setTimeout(() => {
+        toast.remove();
+      }, 2000);
+    }
+
+    // 🟢 Init
+    renderProducts();
+  </script>
+
 </body>
-
 </html>
