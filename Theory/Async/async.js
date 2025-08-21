@@ -80,6 +80,7 @@ async function result(){
         }
     
 }
+
 result()
 function getStudent(id){
     return new Promise((resolve,reject)=>{
