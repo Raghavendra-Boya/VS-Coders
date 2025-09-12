@@ -1,33 +1,215 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Functions</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <meta charset="UTF-8">
+  <title>ShopEase - Function Based App</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-        <!-- <button onclick="showReciepe('potato')" class="bg-green-600 hover:bg-yellow-500 rounded text-white p-2">Order Potato</button>
-        <button onclick="showReciepe('panner')" width="100px">Order Panner</button>
+<body class="bg-gray-50">
 
-   <div id = "output" class="text-green-700 w-100 border">
+  <!-- Header -->
+  <div id="header"></div>
 
-   </div>
-   -->
+  <!-- Main Content -->
+  <main class="max-w-6xl mx-auto p-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
 
-   <div class="">Welcome to my Reciepe</div>
+    <!-- Function without parameters & without return + Timer -->
+    <div id="deal"></div>
 
-   <div id="cardContainer" class="flex gap-6 justify-center"></div>
+    <!-- Function without parameters & with return -->
+    <div id="storeInfo"></div>
 
-   <div id="steps" class="text-center"></div>
+    <!-- Function with parameters & without return -->
+    <div id="greeting"></div>
 
-    <h2>Enter Your Name:</h2>
-  <input type="text" id="username" placeholder="Type your name here" />
-  <button onclick="showName()">Submit</button>
-   
+    <!-- Function with parameters & with return -->
+    <div id="cartTotal"></div>
 
-    <script src="./functions1.js"></script>
+    <!-- Function with default parameters -->
+    <div id="defaultUser"></div>
 
-    
+    <!-- Function Expression -->
+    <div class="bg-pink-100 rounded-2xl shadow-md p-4 text-center">
+      <h2 class="text-lg font-bold text-pink-800 mb-2">Special Offer</h2>
+      <button onclick="showOffer()" class="px-4 py-2 bg-pink-600 text-white rounded-lg">
+        Show Offer
+      </button>
+    </div>
+
+    <!-- Anonymous Function -->
+    <div class="bg-gray-100 rounded-2xl shadow-md p-4 text-center">
+      <h2 class="text-lg font-bold text-gray-800 mb-2">Quick Buy</h2>
+      <button id="buyBtn" class="px-4 py-2 bg-gray-800 text-white rounded-lg">Buy Now</button>
+    </div>
+
+    <!-- Callback Function -->
+    <div id="orderStatus"></div>
+
+    <!-- IIFE -->
+    <div id="initMsg"></div>
+
+  </main>
+
+  <!-- Footer -->
+  <div id="footer"></div>
+
+
+  <script>
+    // 1. Function Declaration → Header & Footer
+    function loadHeader() {
+      document.getElementById("header").innerHTML = `
+        <header class="bg-blue-600 text-white p-4 flex justify-between items-center">
+          <h1 class="text-2xl font-bold">ShopEase</h1>
+          <nav>
+            <a href="#" class="px-2">Home</a>
+            <a href="#" class="px-2">Products</a>
+            <a href="#" class="px-2">Cart</a>
+            <a href="#" class="px-2">Profile</a>
+          </nav>
+        </header>
+      `;
+    }
+
+    function loadFooter() {
+      document.getElementById("footer").innerHTML = `
+        <footer class="bg-gray-800 text-white text-center p-4 mt-6">
+          &copy; 2025 ShopEase. All Rights Reserved.
+        </footer>
+      `;
+    }
+
+    loadHeader();
+    loadFooter();
+
+
+    // 2. Function without parameters & without return → Flash Deal + Countdown
+    function showFlashDeal() {
+      document.getElementById("deal").innerHTML = `
+        <div class="bg-green-100 rounded-2xl shadow-md p-4 text-center">
+          <h2 class="text-lg font-bold text-green-800 mb-2">🔥 Flash Deal</h2>
+          <p>50% Off on Electronics – Today Only!</p>
+          <p id="timer" class="mt-2 text-lg font-semibold text-red-600"></p>
+        </div>
+      `;
+    }
+    showFlashDeal();
+
+    // Countdown Function
+    function startCountdown(durationInSeconds) {
+      let timerElement = document.getElementById("timer");
+      let remaining = durationInSeconds;
+
+      let countdown = setInterval(() => {
+        let minutes = Math.floor(remaining / 60);
+        let seconds = remaining % 60;
+        timerElement.innerText = `⏳ Sale ends in: ${minutes}m ${seconds}s`;
+
+        if (remaining <= 0) {
+          clearInterval(countdown);
+          timerElement.innerText = "❌ Deal Expired!";
+        }
+        remaining--;
+      }, 1000);
+    }
+    startCountdown(300); // 5 min sale timer
+
+
+    // 3. Function without parameters & with return → Store Info
+    function getStoreName() {
+      return "ShopEase Online Store 🛍️";
+    }
+    function getCurrency() {
+      return "₹";
+    }
+    document.getElementById("storeInfo").innerHTML = `
+      <div class="bg-yellow-100 rounded-2xl shadow-md p-4 text-center">
+        <h2 class="text-lg font-bold text-yellow-800 mb-2">Store Info</h2>
+        <p>${getStoreName()} - Prices in ${getCurrency()}</p>
+      </div>
+    `;
+
+
+    // 4. Function with parameters & without return → Greeting
+    function greetUser(username) {
+      document.getElementById("greeting").innerHTML = `
+        <div class="bg-purple-100 rounded-2xl shadow-md p-4 text-center">
+          <h2 class="text-lg font-bold text-purple-800 mb-2">User Greeting</h2>
+          <p>👋 Hi ${username}, Welcome Back!</p>
+        </div>
+      `;
+    }
+    greetUser("Raghavendra");
+
+
+    // 5. Function with parameters & with return → Cart Total
+    function calculateCartTotal(price, qty) {
+      return price * qty;
+    }
+    let total = calculateCartTotal(1200, 2);
+    document.getElementById("cartTotal").innerHTML = `
+      <div class="bg-red-100 rounded-2xl shadow-md p-4 text-center">
+        <h2 class="text-lg font-bold text-red-800 mb-2">Cart</h2>
+        <p>🛒 Your Cart Total: ₹${total}</p>
+      </div>
+    `;
+
+
+    // 6. Function with Default Parameters → Guest Greeting
+    function greet(name = "Guest") {
+      return `Welcome ${name}! Enjoy shopping 🛒`;
+    }
+    document.getElementById("defaultUser").innerHTML = `
+      <div class="bg-indigo-100 rounded-2xl shadow-md p-4 text-center">
+        <h2 class="text-lg font-bold text-indigo-800 mb-2">Default User</h2>
+        <p>${greet()}</p>
+      </div>
+    `;
+
+
+    // 7. Function Expression → Offer Popup
+    const showOffer = function() {
+      alert("🎉 Buy 2 Get 1 Free on Fashion!");
+    };
+
+
+    // 8. Anonymous Function → Buy Button
+    document.getElementById("buyBtn").onclick = function() {
+      alert("✅ Product Added to Cart!");
+    };
+
+
+    // 9. Callback Function → Order Status
+    function placeOrder(callback) {
+      document.getElementById("orderStatus").innerHTML = `
+        <div class="bg-blue-100 rounded-2xl shadow-md p-4 text-center">
+          <h2 class="text-lg font-bold text-blue-800 mb-2">Order Status</h2>
+          <p>⏳ Placing your order...</p>
+        </div>
+      `;
+      setTimeout(callback, 2000);
+    }
+
+    function confirmOrder() {
+      document.getElementById("orderStatus").innerHTML = `
+        <div class="bg-blue-100 rounded-2xl shadow-md p-4 text-center">
+          <h2 class="text-lg font-bold text-blue-800 mb-2">Order Status</h2>
+          <p>✅ Order Confirmed!</p>
+        </div>
+      `;
+    }
+
+    placeOrder(confirmOrder);
+
+
+    // 10. IIFE → App Initialization
+    (function() {
+      document.getElementById("initMsg").innerHTML = `
+        <div class="bg-teal-100 rounded-2xl shadow-md p-4 text-center">
+          <h2 class="text-lg font-bold text-teal-800 mb-2">App Status</h2>
+          <p>⚡ ShopEase Loaded Successfully!</p>
+        </div>
+      `;
+    })();
+  </script>
 </body>
 </html>
